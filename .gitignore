@@ -1,0 +1,6 @@
+node_modules/
+client/app/bower_components/
+client/app/js/bundled.js
+npm-debug.log
+.DS_Store
+dist

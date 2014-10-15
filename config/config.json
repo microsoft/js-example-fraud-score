@@ -1,0 +1,15 @@
+{
+	"host": "http://localhost:7300",
+	"port": "9080",
+	"credentials": {
+	   "username": "testuser",
+	   "password": "changeme"
+	},
+	"logging": false,
+	"constants" : {
+		"REPO_OWNER": "testuser",
+		"REPO_SCRIPT": "ccFraudScore.R",
+		"REPO_DIRECTORY": "example-fraud-score", 
+		"FRAUD_MODEL": "fraudModel.rData"
+	}
+}

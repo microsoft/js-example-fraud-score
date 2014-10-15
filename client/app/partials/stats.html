@@ -1,0 +1,167 @@
+<div class="row col-md-12">
+    <div class="panel panel-default runtime">
+        <div class="panel-heading clearfix">
+            <h5 class="panel-title pull-left">
+                <a tooltip-placement="bottom" tooltip="An RBroker runtime manages all aspects of RTask queueing, execution and result handling on behalf of client applicaitons integrating with DeployR.">
+                        RBroker Runtime
+                </a>
+            </h5>
+            <span ng-show="runtimeStats.username">  
+                <span style="margin-left:160px;font-size:14px; font-weight:bold">{{ runtimeStats.username }} @ {{ runtimeStats.endpoint }}</span>
+            </span>
+            <div class="pull-right">
+                <span><b>Pool Size:</b>
+                </span>
+                <input type="number" name="ps" ng-model="poolSize" ng-disabled="!brokerInitialized" min="1" max="500" step="1" value="1" />
+                <a class="btn btn-primary btn-xs" ng-disabled="!brokerInitialized" tooltip-placement="bottom" tooltip="Resize the pool of R sessions dedicated to the RBroker runtime in use by this demo application. The larger the pool, the higher the expected throughput. Note, the max pool size any application can acquire is ultimately determined by the size and configuration of the DeployR grid." ng-disabled="!brokerInitialized" ng-click="resizePool()">Resize 
+                   <span class="glyphicon glyphicon-refresh"></span>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="height:4px;">
+                </h5>
+            </div>
+        </div>
+        <div class="row stats">
+            <div class="col-md-12">
+                <h5>
+                    Pool
+                </h5>
+            </div>
+        </div>
+        <div class="row stats">
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Number of dedicated R sessions requested by the RBroker runtime.">
+                       Requested Size:
+                </a> 
+                <span style="font-size:16px;color:gray">{{runtimeStats.requestedPoolSize}}</span>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Number of dedicated R sessions allocated by DeployR to the RBroker runtime.">
+                       Allocated Size:
+                </a> 
+                <span style="font-size:16px;color:gray">{{runtimeStats.allocatedPoolSize}}</span>
+            </div>
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Maximum number of RTask that can execute in parallel on the RBroker runtime. Note, the max concurrency of the RBroker (pooled) runtime always equals the number of dedicated R sessions allocated by DeployR to the runtime.">
+                       Max Concurrency:
+                </a> 
+                <span style="font-size:16px;color:gray">{{runtimeStats.allocatedPoolSize}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="height:4px;">
+                </h5>
+            </div>
+        </div>
+        <div class="row stats">
+            <div class="col-md-12">
+                <h5>Tasks</h5>
+            </div>
+        </div>
+        <div class="row stats">
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Number of RTask that have been submitted to the RBroker runtime.">
+                       Submitted Tasks:
+                </a> 
+                <span style="font-size:16px;color:gray">{{runtimeStats.submittedTasks}}</span>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Number of RTask that have been successfully executed by the RBroker runtime.">
+                       Successful Tasks:
+                </a> 
+                <span style="font-size:16px;color:gray">{{runtimeStats.successfulTasks}}</span>
+            </div>
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Number of RTask that have resulted in error when executed by the RBroker runtime. A failure may occur for a number of reasons. For example, if any required input values to your R script are missing or invalid, if there is an error in the syntax or logic of your R script or if your instance of the RBroker runtime loses its connection to the DeployR server due to a dropped network connection.">
+                       Failed Tasks:
+                </a> 
+                <span style="font-size:16px;color:gray">{{runtimeStats.failedTasks}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="height:4px;">
+                </h5>
+            </div>
+        </div>
+        <div class="row stats">
+            <div class="col-md-12">
+                <h5>Fraud Task Throughput</h5>
+            </div>
+        </div>
+        <div class="row stats">
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Number of RTask executed following the most recent click on the Execute button.">
+                       Executed Tasks:
+                </a> 
+                <span style="font-size:16px;color:gray">{{currentTaskThroughput}}</span>
+            </div>
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Estimated RTask throughput, measured in tasks per second, based on the observed RBroker runtime performance for tasks executing following the most recent click on the Execute button.">
+                       Tasks Per Second:
+                </a> 
+                <span style="font-size:16px;color:gray">{{secondTaskThroughput}}</span>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <a tooltip-placement="bottom" tooltip="Estimated RTask throughput, measured in tasks per minute, based on the observed RBroker runtime performance for tasks executing following the most recent click on the Execute button.">
+                       Tasks Per Minute:
+                </a> 
+                <span style="font-size:16px;color:gray">{{minuteTaskThroughput}}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" style="height:10px;">
+                </h5>
+            </div>
+        </div>
+        <div class="row" ng-show="alertMessage">        
+            <div class="col-md-12 alert alert-info">{{alertMessage}}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row col-md-12">
+    <div class="panel panel-default runtime">
+        <div class="panel-heading clearfix">
+            <h5 class="panel-title pull-left">
+                <a tooltip-placement="bottom" tooltip="This demo application performs real-time scoring on user account data to determine the risk of fraudulent transactions.">
+                    Fraud Analysis
+                </a>
+            </h5>
+            <div class="pull-right">
+                <span><b>Task Count:</b>
+                </span>
+                <input name="tc" ng-model="taskCount" ng-disabled="!brokerInitialized" type="number" min="1" max="100000" step="1" value="1" />
+                <a class="btn btn-primary btn-xs" ng-disabled="!brokerInitialized" tooltip-placement="bottom" tooltip="Submit simulated account data for real-time scoring. Each set of account data is executed as an RTask using the RBroker runtime where a fraud score is generated and returned." ng-disabled="!brokerInitialized" ng-click="executeTasks()">Execute 
+                    <span class="glyphicon glyphicon-repeat"></span>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="height:4px;">
+                </h5>
+            </div>
+        </div>
+        <table class="table table-hover table-striped table-condensed">
+            <thead>
+                <th class="col-md-3">Account Balance</th>
+                <th class="col-md-3">Transactions</th>
+                <th class="col-md-3">Credit</th>
+                <th class="col-md-3">Fraud Score</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="fraudScoreResult in fraudScoreResults">
+                    <td>{{fraudScoreResult.balance}}</td>
+                    <td>{{fraudScoreResult.transactions}}</td>
+                    <td>{{fraudScoreResult.credit}}</td>
+                    <td>{{fraudScoreResult.score}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
