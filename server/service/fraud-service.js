@@ -62,8 +62,6 @@ FraudService.prototype = {
                console.log('Pooled: RBroker has shutdown `failure`.');
             });
       }
-
-      this.broadcast(this.runtimeStats());
    },
 
    buildTask: function(task) {
@@ -119,6 +117,13 @@ FraudService.prototype = {
       var self = this;
 
       this.broker = rbroker.pooledTaskBroker(this.brokerConfig)
+         .on('ready', function() {         
+            self.lastAllocatedPoolSize = self.broker.maxConcurrency();
+
+            console.log('RBroker pool initialized with ' +
+              self.lastAllocatedPoolSize + ' R sessions.');
+            self.broadcast(self.runtimeStats());
+         })
          .complete(function(rTask, rTaskResult) {
             print.results(rTask, rTaskResult);
 
@@ -140,11 +145,6 @@ FraudService.prototype = {
             print.stats(stats);
             self.broadcast(self.runtimeStats(stats));
          });
-
-      this.lastAllocatedPoolSize = this.broker.maxConcurrency();
-
-      console.log('RBroker pool initialized with ' +
-         this.lastAllocatedPoolSize + ' R sessions.');
    },
 
    /**

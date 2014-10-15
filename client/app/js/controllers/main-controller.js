@@ -73,7 +73,6 @@ module.exports = function($scope, $http, $location) {
 
       $http.post('/fraud/pool/init/' + $scope.poolSize)
          .success(function(data, status, headers, config) {
-            $scope.alertMessage = null;
             console.log('Attempt to resize pool succeeded, new size=' + $scope.poolSize);
          }).error(function(data, status, headers, config) {
             $scope.errorMessage = 'Attempt to resize pool failed, error=' + data;
@@ -83,7 +82,6 @@ module.exports = function($scope, $http, $location) {
             $scope.currentTaskThroughput = 0;
             $scope.secondTaskThroughput = 0;
             $scope.minuteTaskThroughput = 0;
-
          });
    };
 
@@ -153,6 +151,6 @@ module.exports = function($scope, $http, $location) {
       //
       // Initialize initial RBroker pool on application startup.
       //
-      $scope.resizePool();
+      $scope.$apply(function() { $scope.resizePool(); });
    });
 };
