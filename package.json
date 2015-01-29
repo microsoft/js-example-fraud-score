@@ -1,31 +1,28 @@
 {
-  "name": "js-example-fraud-score",
-  "version": "0.0.1",
-  "description": "R Analytics Fraud Score Example Application - Powered by DeployR RBroker Framework",
-  "repository": "https://github.com/deployr/js-example-fraud-score.git",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "bower install && gulp deployr-deps"
-  },
-  "main": "gulpfile.js",
-  "author": "DeployR - Revolution Analytics Inc.",
-  "main": "server.js",
-  "dependencies": {
-    "gulp": "^3.8.7",
-    "gulp-jshint": "^1.8.4",
-    "gulp-concat": "^2.3.4",
-    "gulp-unzip": "^0.1.2",
-    "gulp-browserify": "^0.5.0",
-    "bower": "^1.3.9",
-    "browserify": "^5.10.0",
-    "primus": "^2.4.8",
-    "express": "^4.9.5",
-    "ws": "^0.4.32",
-    "primus.io": "^3.1.2",
-    "primus-multiplex": "^3.0.3",
-    "primus-emitter": "^3.0.3",
-    "primus-rooms": "^3.1.0",
-    "gulp-express": "^0.1.0"
-  },
-  "license": "Apache License 2.0"
+    "name": "js-example-fraud-score",
+    "version": "0.0.2",
+    "private": "true",
+    "description": "R Analytics Fraud Score Example Application - Powered by DeployR RBroker Framework",
+    "repository": "https://github.com/deployr/js-example-fraud-score.git",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "author": "DeployR - Revolution Analytics Inc.",
+    "main": "server.js",
+    "dependencies": {
+        "deployr": "^7.3.0",
+        "express": "^4.9.5",
+        "primus": "^2.4.8",
+        "primus.io": "^3.1.2",
+        "primus-multiplex": "^3.0.3",
+        "primus-emitter": "^3.0.3",
+        "primus-rooms": "^3.1.0",
+        "rbroker": "^7.3.0",
+        "ws": "^0.4.32"
+    },
+    "devDependencies": {
+        "browserify": "^5.10.0"
+    },
+    "license": "Apache License 2.0"
 }

@@ -3,53 +3,13 @@ js-example-fraud-score
 
 Example use of DeployR as a real-time, R analytics scoring engine.
 
-## Example Quick Start
+## Installation
 
-By default, the example assumes an instance of the **DeployR server** is running 
-on `localhost`. If your instance of DeployR is running at some other IP address 
-then please udpate the `host` location property in the configuration file 
-`config/config.json`.
+There are two ways to install the _js-example-fraud-score_ example:
 
+1. The preferred way is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI) to install.
 
-1. Download and install [Node.js](http://nodejs.org/download/), which ships with 
-npm.
-
-2. Clone the repository:
-
-   ```
-   $ git clone https://github.com/deployr/js-example-fraud-score.git
-   $ cd js-example-fraud-score
-   ```
-
-3. Install the global dependencies:
-
-   ```
-   $ npm install -g gulp bower browserify
-   ```
-
-   You might need `sudo` for globally installed packages, in that case:
-
-   ```
-   $ sudo npm install -g gulp bower browserify
-   ```
-
-4. Install the local dependencies: 
-
-   ```
-   $ npm install
-   ```
-
-5. Set the DeployR server `host` location *if* not running at `localhost` in the
-   configuration file `config/config.json` 
-
-6. Run locally: 
-
-   ```
-   $ gulp
-   ```
-
-7.  Point your browser to `http://localhost:9080`
-
+2. [Manual Installation](#manual-installation) without the DeployR CLI.
 
 ## About
 
@@ -193,22 +153,39 @@ the server application REST API.
 The _score_ generated per request is returned to the client application within a 
 JSON message delivered over a WebSocket channel.
 
+## Manual Installation
+
+**Note** The preferred way to install this example is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI).
+
+1. Download and install [Node.js](http://nodejs.org/download/), which ships with 
+npm.
+
+2. Clone the repository:
+
+   ```
+   $ git clone https://github.com/deployr/js-example-fraud-score.git
+   $ cd js-example-fraud-score
+   ```
+
+3. Install the dependencies:
+
+   ```
+   $ npm install
+   ```
+
+4. Set the DeployR server `endpoint` location *if* not running at `localhost` in 
+   the configuration file `config/config.json` 
+
 ## Running the Example
-
-A [gulp.js](http://gulpjs.com/) build script is provided to run the example:
-
-```
-gulpfile.js
-```
 
 By default, the build configuration assumes an instance of the DeployR server
 is running on `localhost`. If your instance of DeployR is running at some
-other IP address then please update the `host` property in the configuration 
+other IP address then please update the `endpoint` property in the configuration 
 file `config/config.json` as appropriate:
 
 ```
 {
-   "host": "http://localhost:7300",
+   "endpoint": "http://localhost:7300",
    "port": "9080",
    "credentials": {
       "username": "testuser",
@@ -227,7 +204,11 @@ file `config/config.json` as appropriate:
 To run this example application:
 
 ```
-$ gulp
+$ cd js-example-fraud-score
+```
+
+```
+$ npm start
 ```
 
 Observe the console output in your terminal window to determine if the server 
@@ -294,9 +275,17 @@ tutorial for related details:
 - [Client Application Profiling](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#profiling)
 - [Grid Resource Management](http://deployr.revolutionanalytics.com/documents/dev/rbroker/#gridprimer) 
 
+## Building
+
+To build the _Client_ portion of the application:
+
+```
+$ ./node_modules/.bin/browserify client/app/js/main.js > client/app/js/bundle.js
+```
+
 ## License ##
 
-Copyright (C) 2010-2014 by Revolution Analytics Inc.
+Copyright (C) 2010-2015 by Revolution Analytics Inc.
 
 This program is licensed to you under the terms of Version 2.0 of the
 Apache License. This program is distributed WITHOUT

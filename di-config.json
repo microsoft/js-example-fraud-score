@@ -1,0 +1,31 @@
+{
+    "app-install": {
+        "repository": [{
+            "file": {
+                "filename": "ccFraudScore.R",
+                "directory": "example-fraud-score",
+                "descr": "Uploaded from the DeployR CLI."
+            },
+            "permissions": {
+                "restricted": null,
+                "shared": true,
+                "published": false
+            }
+        }, {
+            "file": {
+                "filename": "fraudModel.rData",
+                "directory": "example-fraud-score",
+                "descr": "Uploaded from the DeployR CLI."
+            },
+            "permissions": {
+                "restricted": null,
+                "shared": true,
+                "published": false
+            }
+        }]
+    },
+
+    "app-run": {
+        "requireAuthentication": true
+    }
+}

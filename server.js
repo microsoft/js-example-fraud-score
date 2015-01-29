@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2014 by Revolution Analytics Inc.
+ * Copyright (C) 2010-2015 by Revolution Analytics Inc.
  *
  * This program is licensed to you under the terms of Version 2.0 of the
  * Apache License. This program is distributed WITHOUT
@@ -26,8 +26,8 @@ var primus = new Primus(server, { transformer: 'websockets', parser: 'JSON' });
 primus.on('connection', function (spark) {
     var fraudService = new FraudService(primus);
    
-    router.get('/fraud/score/:tasks', function(req, res) {    	
-    	 var tasks = req.params.tasks === 0 ? 1 : req.params.tasks;
+    router.get('/fraud/score/:tasks', function(req, res) {      
+       var tasks = req.params.tasks === 0 ? 1 : req.params.tasks;
        console.log('REST:/fraud/score/' + tasks + ' called.');
 
        for(var i = 0; i < tasks; i++) {
@@ -38,10 +38,10 @@ primus.on('connection', function (spark) {
     });
 
     router.post('/fraud/pool/init/:size', function (req, res) {
-    	var size = req.params.size === 0 ? 1 : req.params.size;
-    	console.log('REST:/pool/init/' + size + ' called.');
+      var size = req.params.size === 0 ? 1 : req.params.size;
+      console.log('REST:/pool/init/' + size + ' called.');
 
-    	fraudService.buildPool(size);
+      fraudService.buildPool(size);
       res.json({ success: true });
     });
 });
@@ -51,6 +51,15 @@ primus.on('disconnection', function () {
 });
 
 // -- Start server --
-server.listen(config.port, function(){
-  console.log('\033[96mlistening on localhost:' + config.port +' \033[39m');
+server.listen(config.port, function() {
+  var endpoint = process.env.endpoint || config.endpoint,
+      username = process.env.username || config.credentials.username;
+
+  console.log('\n\n');
+  console.log('==============================================================');
+  console.log(' Project property (DeployR endpoint): ' + endpoint);
+  console.log(' Project property (DeployR username): ' + username);
+  console.log(' Project property (DeployR password): [HIDDEN] \n');
+  console.log('\033[96m Example listening on http://localhost:' + config.port +' \033[39m');
+  console.log('==============================================================');
 });

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2014 by Revolution Analytics Inc.
+ * Copyright (C) 2010-2015 by Revolution Analytics Inc.
  *
  * This program is licensed to you under the terms of Version 2.0 of the
  * Apache License. This program is distributed WITHOUT
@@ -33,13 +33,16 @@ function FraudService(primus) {
    this.lastAllocatedPoolSize = 0;
    this.brokerConfig = {
       maxConcurrentTaskLimit: 0,
-      host: config.host,
-      credentials: config.credentials,
+      host: process.env.endpoint || config.endpoint,
+      credentials: {
+        username: process.env.username || config.credentials.username,
+        password: process.env.password || config.credentials.password
+      },
       releaseGridResources: true,
       logging: config.logging,
       pool: {
          preloadobjectname: config.constants.FRAUD_MODEL,
-         preloadobjectauthor: config.constants.REPO_OWNER,
+         preloadobjectauthor: process.env.username || config.credentials.username,
          preloadobjectdirectory: config.constants.REPO_DIRECTORY
       }
    };
@@ -72,7 +75,7 @@ FraudService.prototype = {
       return rbroker.pooledTask({
          filename: config.constants.REPO_SCRIPT,
          directory: config.constants.REPO_DIRECTORY,
-         author: config.constants.REPO_OWNER,
+         author: this.brokerConfig.credentials.username,
          routputs: ['x'],
          rinputs: [RIn.numeric('bal', bal),
             RIn.numeric('trans', trans),
@@ -117,7 +120,7 @@ FraudService.prototype = {
       var self = this;
 
       this.broker = rbroker.pooledTaskBroker(this.brokerConfig)
-         .on('ready', function() {         
+         .ready(function() {         
             self.lastAllocatedPoolSize = self.broker.maxConcurrency();
 
             console.log('RBroker pool initialized with ' +
