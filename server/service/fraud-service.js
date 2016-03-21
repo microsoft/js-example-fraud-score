@@ -202,7 +202,7 @@ FraudService.prototype = {
     * @api private
     */
    buildFraudScore: function(rTask, rTaskResult) {
-      var rinputs = rTask.toJSON().rinputs;
+      var rinputs = rTask.rinputs;
 
       return {
          msgType: MSG_TYPES.score,
