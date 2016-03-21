@@ -11,14 +11,14 @@
     "author": "DeployR - Revolution Analytics Inc.",
     "main": "server.js",
     "dependencies": {
-        "deployr": "^7.3.0",
+        "deployr": "^7.4.3",
         "express": "^4.9.5",
         "primus": "^2.4.8",
         "primus.io": "^3.1.2",
         "primus-multiplex": "^3.0.3",
         "primus-emitter": "^3.0.3",
         "primus-rooms": "^3.1.0",
-        "rbroker": "^7.3.0",
+        "rbroker": "^7.4.0",
         "ws": "^0.4.32"
     },
     "devDependencies": {
