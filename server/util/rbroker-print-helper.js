@@ -103,7 +103,8 @@ module.exports = {
                   result.timeOnServer + ' , call : ' +
                   result.timeOnCall + ' ]');
             } else {
-               console.log('Status[fail]: cause=' + result.failure);
+               console.log('Status[fail]: cause=\n');
+               console.log(result.failure);
             }
             break;
       }
