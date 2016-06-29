@@ -23,5 +23,5 @@
     "devDependencies": {
         "browserify": "^5.10.0"
     },
-    "license": "Apache-2.0""
+    "license": "Apache-2.0"
 }
