@@ -203,7 +203,9 @@ file `config/config.json` as appropriate:
 
 To run this example application:
 
-1. Set the DeployR `endpoint` and the appropriate `credentials`
+1. 
+
+  Set the DeployR `endpoint` and the appropriate `credentials`
 
 2.
 
