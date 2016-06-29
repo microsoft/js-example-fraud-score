@@ -1,9 +1,9 @@
 {
     "name": "js-example-fraud-score",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "private": "true",
     "description": "R Analytics Fraud Score Example Application - Powered by DeployR RBroker Framework",
-    "repository": "https://github.com/deployr/js-example-fraud-score.git",
+    "repository": "https://github.com/microsoft/js-example-fraud-score.git",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js"
@@ -11,18 +11,17 @@
     "author": "DeployR - Revolution Analytics Inc.",
     "main": "server.js",
     "dependencies": {
-        "deployr": "^7.4.3",
         "express": "^4.9.5",
         "primus": "^2.4.8",
         "primus.io": "^3.1.2",
         "primus-multiplex": "^3.0.3",
         "primus-emitter": "^3.0.3",
         "primus-rooms": "^3.1.0",
-        "rbroker": "^7.4.0",
+        "rbroker": "8.0.5",
         "ws": "^0.4.32"
     },
     "devDependencies": {
         "browserify": "^5.10.0"
     },
-    "license": "Apache License 2.0"
+    "license": "Apache-2.0""
 }

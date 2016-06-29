@@ -7,7 +7,7 @@ Example use of DeployR as a real-time, R analytics scoring engine.
 
 There are two ways to install the _js-example-fraud-score_ example:
 
-1. The preferred way is to use the [DeployR command line interface](https://github.com/deployr/deployr-cli) (CLI) to install.
+1. The preferred way is to use the [DeployR command line interface](https://github.com/microsoft/deployr-cli) (CLI) to install.
 
 2. [Manual Installation](#manual-installation) without the DeployR CLI.
 
@@ -185,11 +185,11 @@ file `config/config.json` as appropriate:
 
 ```
 {
-   "endpoint": "http://localhost:7300",
+   "endpoint": "http://localhost:8.0.5",
    "port": "9080",
    "credentials": {
       "username": "testuser",
-      "password": "changeme"
+      "password": "TESTUSER_PASSWORD"
    },
    "logging": false,
    "constants" : {
@@ -203,13 +203,19 @@ file `config/config.json` as appropriate:
 
 To run this example application:
 
-```
-$ cd js-example-fraud-score
-```
+1. Set the DeployR `endpoint` and the appropriate `credentials`
 
-```
-$ npm start
-```
+2.
+
+  ```
+  $ cd js-example-fraud-score
+  ```
+
+3.
+ 
+  ```
+  $ npm start
+  ```
 
 Observe the console output in your terminal window to determine if the server 
 application has started successfully. Once started, open the client application 

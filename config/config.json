@@ -1,9 +1,9 @@
 {
-	"endpoint": "http://localhost:7300",
+	"endpoint": "http://localhost:8050",
 	"port": "9080",
 	"credentials": {
 	   "username": "testuser",
-	   "password": "changeme"
+	   "password": "TESTUSER_PASSWORD"
 	},
 	"logging": false,
 	"constants" : {
